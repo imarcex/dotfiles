@@ -1,5 +1,6 @@
 # Dotfiles
 Hello! These are my personal dotfiles for my Void Linux Laptop. The technologies it is using are:
+
 - **OS:** Void Linux
 - **WM:** bspwm
 - **Terminal:** alacritty

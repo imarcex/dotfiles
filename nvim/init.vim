@@ -14,7 +14,9 @@ call plug#end()
 
 " Line numbers
 set number
+set relativenumber
 
+" Theme
 colorscheme everforest
 
 " Tabs

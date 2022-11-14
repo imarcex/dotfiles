@@ -11,10 +11,13 @@ function init_host {
     gpuDrivers
     utils
     audio
+    virtualbox
+    pandoc
     fixfonts
-    sudo -u imarcex $installpath/setup.sh full-bspwm
+    sudo -u $user $installpath/setup.sh full-bspwm
+    sudo -u $user $installpath/setup.sh 
     rm -rf $tmpfolder/*
-    echo "[*] Everything has been installed]"
+    echo "[*] Everything has been installed"
 }
 
 function full-bspwm {
@@ -25,6 +28,17 @@ function full-bspwm {
     polybar
     tmux
     homedir
+}
+
+function virtualbox {
+    xbps-install -y virtualbox-ose virtualbox-ose-guest libvirt
+    ln -s /etc/sv/libvirtd /var/service/
+    ln -s /etc/sv/virtlogd /var/service/
+    usermod -aG vboxuser imarcex
+}
+
+function pandoc {
+    xbps-install -y pandoc texlive texlive-bin zathura zathura-pdf-mupdf
 }
 
 function gpuDrivers {
@@ -38,7 +52,7 @@ function xorg {
 function homedir {
     shopt -s extglob
     shopt -s dotglob
-    mkdir $homepath/desk $homepath/docs $homepath/dls $homepath/pics
+    mkdir -p $homepath/desk $homepath/docs $homepath/dls $homepath/pics
     cp $installpath/homedir/* $homepath/
     sudo xbps-install xdg-user-dirs xdg-user-dirs-gtk feh
     cp $installpath/user-dirs.dirs $homepath/.config
@@ -85,8 +99,14 @@ function tmux {
     cp -r $installpath/tmux $homepath/.config/
 }
 
+function bitwarden {
+    mkdir -p $homepath/.local/bin $homepath/.local/share/applications
+    wget -q "https://vault.bitwarden.com/download/?app=desktop&platform=linux" -P $homepath/.local/bin
+    sed 's/imarcex/$user/g' './Bitwarden.desktop.example' > $homepath/.local/share/applications
+}
+
 function utils {
-    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3 python3-pip perl nodejs  nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop fzf
+    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3 python3-pip nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop fzf
 }
 
 function audio {
