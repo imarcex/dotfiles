@@ -86,7 +86,7 @@ function tmux {
 }
 
 function utils {
-    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3 nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop
+    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3 python3-pip perl nodejs  nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop fzf
 }
 
 function audio {

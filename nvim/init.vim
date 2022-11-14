@@ -1,5 +1,5 @@
 " Plug Config
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.local/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -7,12 +7,15 @@ Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdTree'
 Plug 'glepnir/dashboard-nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } 
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim',
+Plug 'sainnhe/everforest'
 
 call plug#end()
 
 " Line numbers
 set number
+
+colorscheme everforest
 
 " Tabs
 set tabstop=4
