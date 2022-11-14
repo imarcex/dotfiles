@@ -1,0 +1,61 @@
+# reload sxhkd config
+alt + Escape
+	pkill -USR1 -x sxhkd
+
+#quit or restart bspwm
+alt + shift + {q,r}
+	bspc {quit, wm -r}
+
+# Run alacritty
+super + Return
+	alacritty
+
+# Open rofi
+super + d
+	rofi -show run
+
+# Open thunar
+super + e
+    thunar
+
+### BEGIN OF BSPWM ###
+
+# focus the node in the given direction
+super + {_,shift + }{h,k,j,l}
+	bspc node -{f,s} {west,north,south,east}
+
+# Swap the current one to the biggest
+super + shift + Return
+	bspc node -s biggest.local
+
+# close or kill a window
+alt + {-,shift + }c
+	bspc node -{k,c}
+
+# change the window state
+alt + {t,ctrl + t,l,f}
+	bspc node -t {tiled,pseudo_tiled,floating,flullscreen}
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0, bottom 0 20, top 0 -20,right 20 0}
+
+# focus or send a window to the given desktop
+alt + {-,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# switch current desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+### END OF BSPWM ###
+
+# Volume Control
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +5% && volume.sh
+
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -5% && volume.sh
+
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle && volume.sh
