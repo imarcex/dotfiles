@@ -142,8 +142,8 @@ function audio {
 function fixfonts {
     ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
     xbps-install -y font-fira-otf font-fira-ttf font-firacode
+    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip" -P $tmpfolder/
     echo -e "[*] Unziping fonts, it might be slow, don't worry"
-    wget -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip" -P $tmpfolder/
     unzip $tmpfolder/Iosevka.zip -d $tmpfolder/Iosevka
     mv $tmpfolder/Iosevka /usr/share/fonts
 }
