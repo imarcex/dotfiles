@@ -9,6 +9,22 @@ tmpfolder=$installpath/tmp
 function init_host {
     xbps-install -Suy
     gpuDrivers
+    xorg
+    utils
+    audio
+    virtualbox
+    pandoc
+    fixfonts
+    sudo -u $user $installpath/setup.sh full-bspwm
+    sudo -u $user $installpath/setup.sh 
+    rm -rf $tmpfolder/*
+    echo "[*] Everything has been installed"
+}
+
+function init_vmware {
+    xbps-install -Suy
+    vmwareDrivers # Todo
+    xorg
     utils
     audio
     virtualbox
@@ -23,11 +39,13 @@ function init_host {
 function full-bspwm {
     bspwm
     alacritty
+    rofi
     neovim
     sxhkd
     polybar
     tmux
     homedir
+    picom
 }
 
 function virtualbox {
@@ -63,6 +81,11 @@ function homedir {
     cp $installpath/images/* $homepath/pics/
 }
 
+function picom {
+    sudo xbps-install picom
+    cp -r $installpath/picom $homepath/.config/
+}
+
 function alacritty {
     sudo xbps-install -y alacritty
     cp -r $installpath/alacritty $homepath/.config/
@@ -91,7 +114,7 @@ function sxhkd {
 
 function polybar {
     sudo xbps-install -y polybar
-    cp -r $installpath/sxhkd $homepath/.config/
+    cp -r $installpath/polybar $homepath/.config/
 }
 
 function tmux {
@@ -110,7 +133,7 @@ function utils {
 }
 
 function audio {
-    xbps-install -y pipewire pipewire-pulse helvum pavucontrol alsa-utils elogind notify-send rtkit
+    xbps-install -y pipewire helvum pavucontrol alsa-utils elogind libnotify rtkit
     ln -s /etc/sv/alsa /var/service
     ln -s /etc/sv/elogind /var/service
     ln -s /etc/sv/rtkit /var/service
@@ -120,7 +143,7 @@ function fixfonts {
     ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
     xbps-install -y font-fira-otf font-fira-ttf font-firacode
     echo -e "[*] Unziping fonts, it might be slow, don't worry"
-    wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip -P $tmpfolder/
+    wget -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip" -P $tmpfolder/
     unzip $tmpfolder/Iosevka.zip -d $tmpfolder/Iosevka
     mv $tmpfolder/Iosevka /usr/share/fonts
 }
