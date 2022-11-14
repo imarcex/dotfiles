@@ -7,12 +7,12 @@ mkdir -p $installpath/tmp
 tmpfolder=$installpath/tmp
 
 function init_host {
-    xbps-install -Su
+    xbps-install -Suy
     gpuDrivers
     utils
     audio
     fixfonts
-    su imarcex -c 'full-bspwm'
+    sudo -u imarcex $installpath/setup.sh full-bspwm
     rm -rf $tmpfolder/*
     echo "[*] Everything has been installed]"
 }
@@ -61,7 +61,7 @@ function neovim {
 }
 
 function bspwm {
-    sudo xpbs-install -y bspwm
+    sudo xbps-install -y bspwm
     cp -r $installpath/bspwm $homepath/.config/
 }
 
@@ -71,7 +71,7 @@ function rofi {
 }
 
 function sxhkd {
-    sudo xpbs-install -y sxhkd
+    sudo xbps-install -y sxhkd
     cp -r $installpath/sxhkd $homepath/.config/
 }
 
@@ -99,9 +99,10 @@ function audio {
 function fixfonts {
     ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
     xbps-install -y font-fira-otf font-fira-ttf font-firacode
+    echo -e "[*] Unziping fonts, it might be slow, don't worry"
     wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip -P $tmpfolder/
     unzip $tmpfolder/Iosevka.zip -d $tmpfolder/Iosevka
     mv $tmpfolder/Iosevka /usr/share/fonts
 }
 
-inithost
+$1
