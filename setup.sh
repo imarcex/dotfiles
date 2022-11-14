@@ -36,6 +36,8 @@ function xorg {
 }
 
 function homedir {
+    shopt -s extglob
+    shopt -s dotglob
     mkdir $homepath/desk $homepath/docs $homepath/dls $homepath/pics
     cp $installpath/homedir/* $homepath/
     sudo xbps-install xdg-user-dirs xdg-user-dirs-gtk feh
