@@ -1,6 +1,9 @@
 #! /bin/sh
 
 # Application Init
+pipewire &
+pipewire-pulse &
+sxhkd &
 feh --bg-center --no-fehbg ~/pics/green_sky.png &
 thunar --daemon &
 picom --config ~/.config/picom/picom.conf &
