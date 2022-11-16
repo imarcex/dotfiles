@@ -8,35 +8,21 @@ tmpfolder=$installpath/tmp
 
 function init_host {
     xbps-install -Suy
-    gpuDrivers
+    amdDrivers
     xorg
     utils
     audio
     virtualbox
     pandoc
     fixfonts
+    fixdirs
     sudo -u $user $installpath/setup.sh full-bspwm
-    sudo -u $user $installpath/setup.sh 
-    rm -rf $tmpfolder/*
-    echo "[*] Everything has been installed"
-}
-
-function init_vmware {
-    xbps-install -Suy
-    vmwareDrivers # Todo
-    xorg
-    utils
-    audio
-    virtualbox
-    pandoc
-    fixfonts
-    sudo -u $user $installpath/setup.sh full-bspwm
-    sudo -u $user $installpath/setup.sh 
-    rm -rf $tmpfolder/*
+    # rm -rf $tmpfolder/*
     echo "[*] Everything has been installed"
 }
 
 function full-bspwm {
+    zsh
     bspwm
     alacritty
     rofi
@@ -46,6 +32,21 @@ function full-bspwm {
     tmux
     homedir
     picom
+}
+
+function zsh {
+    sudo xbps-install zsh starship
+    cp -r $installpath/zsh $homepath/.config/
+}
+
+function fixdirs {
+    echo "export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+export ZDOTDIR="$HOME"/.config/zsh" > /etc/zsh/zshenv
 }
 
 function virtualbox {
@@ -59,7 +60,12 @@ function pandoc {
     xbps-install -y pandoc texlive texlive-bin zathura zathura-pdf-mupdf
 }
 
-function gpuDrivers {
+function nvidiaDrivers {
+    xbps-install -y void-repo-nonfree
+    xbps-install -y nvidia
+}
+
+function amdDrivers {
     xbps-install -y xf86-video-amdgpu mesa-vaapi mesa-vdpau linux-firmware-amd
 }
 
@@ -70,14 +76,13 @@ function xorg {
 function homedir {
     shopt -s extglob
     shopt -s dotglob
-    mkdir -p $homepath/desk $homepath/docs $homepath/dls $homepath/pics
+    mkdir -p $homepath/docs $homepath/dls $homepath/pics/ss
     cp $installpath/homedir/* $homepath/
     sudo xbps-install xdg-user-dirs xdg-user-dirs-gtk feh
     cp $installpath/user-dirs.dirs $homepath/.config
     mkdir -p $homepath/.local/bin
     cp $installpath/bin/volume.sh $homepath/.local/bin
     chmod +x $homepath/.local/bin
-    sudo echo "XDG_RUNTIME_DIR='/run/user/1000'" >> /etc/environment
     cp $installpath/images/* $homepath/pics/
 }
 
@@ -122,14 +127,8 @@ function tmux {
     cp -r $installpath/tmux $homepath/.config/
 }
 
-function bitwarden {
-    mkdir -p $homepath/.local/bin $homepath/.local/share/applications
-    wget -q "https://vault.bitwarden.com/download/?app=desktop&platform=linux" -P $homepath/.local/bin
-    sed 's/imarcex/$user/g' './Bitwarden.desktop.example' > $homepath/.local/share/applications
-}
-
 function utils {
-    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3 python3-pip nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop fzf
+    xbps-install -y bat zathura xtools xsel xclip unzip p7zip rsync setxkbmap firefox qutebrowser python3-devel python3-pip nitrogen neofetch htop fuse curl wget Thunar man man-pages btop tdrop fzf maim
 }
 
 function audio {
@@ -142,10 +141,10 @@ function audio {
 function fixfonts {
     ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
     xbps-install -y font-fira-otf font-fira-ttf font-firacode
-    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip" -P $tmpfolder/
-    echo -e "[*] Unziping fonts, it might be slow, don't worry"
-    unzip $tmpfolder/Iosevka.zip -d $tmpfolder/Iosevka
-    mv $tmpfolder/Iosevka /usr/share/fonts
+    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Iosevka.zip" && mv Iosevka.zip $tmpfolder
+    # echo -e "[*] Unziping fonts, it might be slow, don't worry"
+    # unzip $tmpfolder/Iosevka.zip -d $tmpfolder/Iosevka
+    # mv $tmpfolder/Iosevka /usr/share/fonts
 }
 
 $1

@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Bitwarden
-Comment=Bitwarden
-Exec=/home/imarcex/.local/bin/Bitwarden.AppImage
-Terminal=false
-Categories=Privacy
-MimeType=x-scheme-handler/bitwarden;

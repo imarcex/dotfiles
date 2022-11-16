@@ -3,7 +3,7 @@ local o = vim.o
 
 -- Colors
 o.termguicolors = true
-o.colorscheme = 'everforest'
+o.background = 'dark'
 
 -- Tabs
 o.tabstop = 4

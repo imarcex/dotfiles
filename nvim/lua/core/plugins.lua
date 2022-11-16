@@ -30,15 +30,12 @@ packer.startup(function(use)
 	use("nvim-treesitter/nvim-treesitter") -- Treesitter Syntax Highlighting
 
 	-- Productivity
-	use("vimwiki/vimwiki")
 	use("jreybert/vimagit")
-	use("nvim-orgmode/orgmode")
 
 	use("folke/which-key.nvim") -- Which Key
 	use("nvim-lualine/lualine.nvim") -- A better statusline
 
 	-- File management --
-	use("vifm/vifm.vim")
 	use("preservim/nerdtree")
 	-- use("tiagofumo/vim-nerdtree-syntax-highlight") -- It gives error
 	use("ryanoasis/vim-devicons")
@@ -47,7 +44,6 @@ packer.startup(function(use)
 	use("tpope/vim-surround")
 
 	-- Syntax Highlighting and Colors --
-	use("PotatoesMaster/i3-vim-syntax")
 	use("kovetskiy/sxhkd-vim")
 	use("vim-python/python-syntax")
 	use("ap/vim-css-color")
@@ -62,10 +58,9 @@ packer.startup(function(use)
     use("sainnhe/everforest")
 	use("kyazdani42/nvim-palenight.lua")
 
-	-- Other stuff --
-	use("frazrepo/vim-rainbow")
+    use("ellisonleao/gruvbox.nvim")
 
-	if packer_bootstrap then
+    if packer_bootstrap then
 		packer.sync()
 	end
 end)

@@ -9,3 +9,8 @@ map("n", "<C-t>", ":NERDTreeToggle<CR>")
 map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
+
+-- {{{ Compiling
+-- Pandoc PDFs
+map("n", "<leader>k", "<CMD>!md2pdf %<CR>")
+-- }}}
