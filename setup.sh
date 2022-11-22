@@ -97,7 +97,7 @@ function alacritty {
 }
 
 function neovim {
-    sudo xbps-install -y neovim
+    #sudo xbps-install -y neovim
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     cp -r $installpath/nvim $homepath/.config/
 }
