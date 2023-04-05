@@ -155,3 +155,29 @@ cp zsh/zshrc $HOME/.config/zsh/.zshrc
 # If you have fresh installation without any changes (something will fail)
 cp zsh/zshrc $HOME/.zshrc
 ```
+
+# Tmux
+
+## tpm
+Install tmux plugin manager
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+## Installation
+
+Copy the config file
+
+```bash
+mkdir -p $HOME/.config/tmux
+cp tmux/tmux.conf $HOME/.config/tmux
+mv $HOME/.tmux/plugins $HOME/.config/tmux/plugins
+```
+
+Then open a tmux session and do `<Ctrl A> + I`
+
+```bash
+tmux new
+# <Ctrl A> + I
+```
