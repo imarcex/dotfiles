@@ -13,6 +13,9 @@ Hello! These are my personal dotfiles feel free to pick up what you want.
   * [Starship](#starship)
   * [Nerd Font](#nerd-font)
   * [Installation](#installation-1)
+- [Tmux](#tmux)
+  * [tpm](#tpm)
+  * [Installation](#Installation-2)
 
 # Neovim
 
