@@ -39,7 +39,11 @@ On Debian based distros the npm delivered version is 12.x, but it requires 16.x,
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ```
 
-Then you will have to add it to the PATH.
+Then you will have to add it to the PATH. 
+
+**Important**.
+
+If you are planning to use my Zsh config, skip this step.
 
 **zsh**
 ```bash
