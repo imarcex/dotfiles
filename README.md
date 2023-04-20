@@ -23,3 +23,5 @@ su root
 ```
 
 In most cases you may want to use `./setup.sh init_host` as it will do a full install, if you know what you are doing, you can call another function.
+
+hola
